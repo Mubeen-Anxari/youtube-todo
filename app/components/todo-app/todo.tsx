@@ -1,7 +1,8 @@
 import { useAppDispatch, useAppSelector } from "@/app/hooks/hook";
-import { addTodo } from "@/app/redux/slice";
+import { addTodo, deleteTodo } from "@/app/redux/slice";
 import { onChangeEventType } from "@/app/types/componentsType";
 import React, { useState } from "react";
+import Item from "./item/item";
 
 export default function Todo() {
   const [input, setInput] = useState<string>("");
@@ -32,17 +33,9 @@ export default function Todo() {
       </div>
       {todos?.todo?.map((item) => {
         return (
-          <div className="">
-            <div className="flex flex-1 ">
-              <div className="flex justify-between ">
-                <p>{item}</p>
-              </div>
-              <div className="flex gap-2">
-                <button className=" text-white rounded-lg p-1 bg-red-700">Delete</button>
-                <button className=" text-white rounded-lg p-1 bg-red-700">Delete</button>
-              </div>
-            </div>
-          </div>
+         <div>
+            <Item/>
+         </div>
         );
       })}
     </div>

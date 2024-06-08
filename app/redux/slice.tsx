@@ -17,7 +17,7 @@ export const TodoSlice = createSlice({
   initialState,
   reducers: {
    addTodo:(state,action)=>{
-    state.todo=[...state.todo=action.payload]
+    state.todo=[...state.todo,action.payload]
    },
    deleteTodo:(state,action)=>{
     state.todo=state.todo.filter((item)=>{
