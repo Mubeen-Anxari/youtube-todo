@@ -17,39 +17,40 @@ export default function Todo(Props: Props) {
     setInput(event?.target.value);
   };
   return (
-    <div>
-      <div className="flex justify-center flex-col items-center mt-10">
-        <h1 className=" font-bold text-2xl mt-2">Tasks List 2024</h1>
-        <div className="flex  gap-2 ">
-          <input
-            onChange={onChangeHandler}
-            className=" bg-slate-700 text-white rounded-lg p-1 w-[500px]"
-            type="text"
-            value={input}
-            placeholder="What you have planned ?..."
-          />
-          <button
-            onClick={() => {
-              dispatch(addTodo({
-                id:uuid4(),
-                title:input
+    <div className="p-4 max-w-[650px] m-auto">
+      <h1 className=" font-bold text-2xl text-center">Tasks List 2024</h1>
+      <div className="flex gap-2 items-center mt-4">
+        <input
+          onChange={onChangeHandler}
+          className=" bg-slate-700 text-white rounded-lg flex-1 p-1"
+          type="text"
+          value={input}
+          placeholder="What you have planned ?..."
+        />
+        <button
+          disabled={input == ""}
+          onClick={() => {
+            dispatch(
+              addTodo({
+                id: uuid4(),
+                title: input,
               }),
-              setInput('')
+              setInput("")
             );
-            }}
-            className=" font-bold text-2xl  text-pink-800"
-          >
-            Add Task
-          </button>
-        </div>
+          }}
+          className=" font-bold text-2xl  text-pink-800"
+        >
+          Add Task
+        </button>
       </div>
-      {todos?.todo?.map((item) => {
-        return (
-          <div>
-            <Item item={item} />
-          </div>
-        );
-      })}
+      <div className="flex flex-col gap-2  mt-4">
+        {todos?.todo?.map((item) => {
+          return <Item item={item} />;
+        })}
+      </div>
+      {todos?.todo?.length === 0 && (
+        <h1 className="text-center">No todo item</h1>
+      )}
     </div>
   );
 }
