@@ -1,10 +1,15 @@
 import { useAppDispatch, useAppSelector } from "@/app/hooks/hook";
-import { addTodo, deleteTodo } from "@/app/redux/slice";
+import { addTodo, deleteTodo, todoType } from "@/app/redux/slice";
 import { onChangeEventType } from "@/app/types/componentsType";
 import React, { useState } from "react";
 import Item from "./item/item";
+import uuid4 from "uuid4";
+import { title } from "process";
+interface Props {
+  item: todoType;
+}
 
-export default function Todo() {
+export default function Todo(Props: Props) {
   const [input, setInput] = useState<string>("");
   const todos = useAppSelector((state) => state.todo);
   const dispatch = useAppDispatch();
@@ -24,7 +29,14 @@ export default function Todo() {
             placeholder="What you have planned ?..."
           />
           <button
-            onClick={() => dispatch(addTodo(input))}
+            onClick={() => {
+              dispatch(addTodo({
+                id:uuid4(),
+                title:input
+              }),
+              setInput('')
+            );
+            }}
             className=" font-bold text-2xl  text-pink-800"
           >
             Add Task
@@ -33,9 +45,9 @@ export default function Todo() {
       </div>
       {todos?.todo?.map((item) => {
         return (
-         <div>
-            <Item/>
-         </div>
+          <div>
+            <Item item={item} />
+          </div>
         );
       })}
     </div>

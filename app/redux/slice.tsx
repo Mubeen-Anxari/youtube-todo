@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-// interface todoType{
-//     id:number,
-//     title:string
-// }
+ export interface todoType{
+    id:string,
+    title:string
+}
 export interface TodoState {
- todo:string[]
+ todo:todoType[]
 }
 
 const initialState: TodoState = {
@@ -21,7 +21,7 @@ export const TodoSlice = createSlice({
    },
    deleteTodo:(state,action)=>{
     state.todo=state.todo.filter((item)=>{
-        return item!==action.payload
+        return item.id!==action.payload
     })
     
    }
